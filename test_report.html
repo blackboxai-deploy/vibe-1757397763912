@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Validation Results - Customer Data Validation Suite</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .metric { background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; border-left: 4px solid #007bff; }
+        .metric-value { font-size: 2em; font-weight: bold; color: #333; }
+        .metric-label { color: #666; margin-top: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f8f9fa; font-weight: bold; }
+        .status-passed { color: #28a745; font-weight: bold; }
+        .status-failed { color: #dc3545; font-weight: bold; }
+        .status-warning { color: #ffc107; font-weight: bold; }
+        .footer { margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 6px; }
+        .test-detail { margin-bottom: 10px; }
+        .error-message { color: #dc3545; font-style: italic; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Data Validation Results Report</h1>
+        <h2>Customer Data Validation Suite</h2>
+        <p>Execution ID: exec_sample_123 | Date: 1/15/2025, 10:30:00 AM | Duration: 2m 15s</p>
+    </div>
+    
+    <div class="summary">
+        <div class="metric">
+            <div class="metric-value">156</div>
+            <div class="metric-label">Total Tests</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">142</div>
+            <div class="metric-label">Passed</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">12</div>
+            <div class="metric-label">Failed</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">91.03%</div>
+            <div class="metric-label">Pass Rate</div>
+        </div>
+    </div>
+
+    <h3>🧪 Test Case Details</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Test ID</th>
+                <th>Test Name</th>
+                <th>Module</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>TC_001</td>
+                <td>File Availability Check</td>
+                <td>CUSTOMER_DATA</td>
+                <td>file_availability</td>
+                <td class="status-passed">PASSED</td>
+                <td>0.5s</td>
+                <td>Verify customer feed file exists in expected location</td>
+                <td>
+                    <div class="test-detail"><strong>Expected:</strong> File exists: /feeds/customer_daily_20250115.csv</div>
+                    <div class="test-detail"><strong>Actual:</strong> File found: /feeds/customer_daily_20250115.csv (2.3MB)</div>
+                    
+                </td>
+            </tr>
+            
+            <tr>
+                <td>TC_002</td>
+                <td>Customer ID Mandatory Check</td>
+                <td>CUSTOMER_DATA</td>
+                <td>mandatory_fields</td>
+                <td class="status-failed">FAILED</td>
+                <td>1.2s</td>
+                <td>Ensure Customer_ID field is not null in all records</td>
+                <td>
+                    <div class="test-detail"><strong>Expected:</strong> 0 null values in Customer_ID column</div>
+                    <div class="test-detail"><strong>Actual:</strong> 3 null values found in Customer_ID column</div>
+                    <div class="error-message"><strong>Error:</strong> Rows 145, 267, 401 contain null Customer_ID values</div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>TC_003</td>
+                <td>Email Format Validation</td>
+                <td>CUSTOMER_DATA</td>
+                <td>pattern_matching</td>
+                <td class="status-warning">WARNING</td>
+                <td>2.1s</td>
+                <td>Validate email addresses follow proper format</td>
+                <td>
+                    <div class="test-detail"><strong>Expected:</strong> All emails match regex pattern</div>
+                    <div class="test-detail"><strong>Actual:</strong> 2 emails with minor formatting issues</div>
+                    <div class="error-message"><strong>Error:</strong> Non-critical: 2 emails missing .com extension</div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>TC_004</td>
+                <td>Data Loading Verification</td>
+                <td>CUSTOMER_DATA</td>
+                <td>data_loading</td>
+                <td class="status-passed">PASSED</td>
+                <td>3.8s</td>
+                <td>Verify all records loaded into staging table</td>
+                <td>
+                    <div class="test-detail"><strong>Expected:</strong> 1,247 records loaded successfully</div>
+                    <div class="test-detail"><strong>Actual:</strong> 1,247 records loaded into STG_CUSTOMER table</div>
+                    
+                </td>
+            </tr>
+            
+            <tr>
+                <td>TC_005</td>
+                <td>Age Range Validation</td>
+                <td>CUSTOMER_DATA</td>
+                <td>range_validation</td>
+                <td class="status-failed">FAILED</td>
+                <td>0.9s</td>
+                <td>Ensure customer age is between 18 and 120</td>
+                <td>
+                    <div class="test-detail"><strong>Expected:</strong> All ages between 18-120</div>
+                    <div class="test-detail"><strong>Actual:</strong> 5 records with invalid age values</div>
+                    <div class="error-message"><strong>Error:</strong> Ages outside range: 15, 16, 125, 130, 145</div>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <h4>📋 Execution Environment</h4>
+        <p><strong>Source Server:</strong> server1.company.com</p>
+        <p><strong>Target Server:</strong> server2.company.com</p>
+        <p><strong>Databases:</strong> STG_DB, PROD_DB</p>
+        <p><strong>Tables:</strong> STG_CUSTOMER, PROD_CUSTOMER, REF_STATES</p>
+        <p><strong>Metadata File:</strong> Customer_Data_Metadata.xlsx</p>
+        <p><strong>Rules Applied:</strong> 67/67</p>
+        
+        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+            Generated by Data Validation Testing Framework on 9/9/2025, 5:51:24 AM
+        </p>
+    </div>
+</body>
+</html>
