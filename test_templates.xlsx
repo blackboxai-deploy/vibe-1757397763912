@@ -1,0 +1,5 @@
+Test Case Templates - FILE_AVAILABILITY
+
+Test ID,Test Name,Description,Test Type,Preconditions,Test Steps,Expected Result,Test Data,Priority,Module
+"TC_FA_001","Feed File Existence Check","Verify that the expected feed file exists in the specified location","file_availability","Feed file should be available in the designated folder","Navigate to feed file location: /feeds/[module_name]/; Check if file with expected naming pattern exists; Verify file size is greater than 0 bytes; Confirm file is not locked by another process","Feed file exists and is accessible","File path: /feeds/customer_daily_YYYYMMDD.csv","High","SAMPLE_MODULE"
+"TC_FA_002","File Format Validation","Validate that the feed file is in the expected format (CSV/Excel/etc.)","file_availability","Feed file exists and is accessible","Open the feed file; Verify file extension matches expected format; Check file header structure; Validate delimiter and encoding","File format matches specification","Expected format: CSV with comma delimiter, UTF-8 encoding","High","SAMPLE_MODULE"
